@@ -1,42 +1,42 @@
-### BINARY SEARCH  is   a searching algorithm for finding an element's position in a sorted algorithm.
+from typing import List
 
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        low, high = 0, len(nums) - 1
 
-# The elements can be sorted in descending or ascending order( Doesn't matter the order.
+        while low <= high:
+            mid = (low + high) // 2
 
-### THIS IS THE CODE IN PYTHON.
+            if nums[mid] == target:
+                return mid
 
+            # Check which half of the array is sorted and perform binary search accordingly
+            if nums[low] <= nums[mid]:  # Left half is sorted
+                if nums[low] <= target < nums[mid]:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+            else:  # Right half is sorted
+                if nums[mid] < target <= nums[high]:
+                    low = mid + 1
+                else:
+                    high = mid - 1
 
-def binary_search(arr,target):
+        return -1  # Target not found
 
-    #this is the same as low = 0 and high = len(arr) -1
+# Input: sorted_list is a list of integers
+sorted_list = [int(x) for x in input("Enter sorted list elements separated by spaces: ").split()]
 
-    low , high = 0 , len(arr) - 1
+# Input: target_element is an integer
+target_element = int(input("Enter the target element: "))
 
+# Create an instance of the Solution class
+solution = Solution()
 
-    while low <= high:
-        mid = (low + high) // 2
-
-        if arr[mid] == target:
-            return mid
-        elif arr[mid] < target:
-            low = mid + 1
-        else:
-            high = mid - 1
-
-    return - 1
-
-
-sorted_list = input("Enter sorted list elements: \n").split()
-
-
-print("Sorted list : ", sorted_list)
-
-target_element = input ("\nEnter the target element of the above array  : \n")
-
-position = binary_search (sorted_list , target_element)
-
+# Call the search method to find the position of the target_element
+position = solution.search(sorted_list, target_element)
 
 if position != -1:
-    print(f"{target_element} found at index { position} ")
+    print(f"{target_element} found at index {position}")
 else:
-    print(f"{target_element}  Not Found")
+    print(f"{target_element} not found")
