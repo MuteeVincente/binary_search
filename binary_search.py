@@ -21,8 +21,8 @@ class Solution:
                     low = mid + 1
                 else:
                     high = mid - 1
-
         return -1  # Target not found
+    
 
 # Input: sorted_list is a list of integers
 sorted_list = [int(x) for x in input("Enter sorted list elements separated by spaces: ").split()]
